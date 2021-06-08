@@ -11,23 +11,27 @@
 </head>
 
 <body>
+  <pre id='console'>
+
+  </pre>
   <script>
-    (function () {
       myIFrame = document.createElement('iframe');
       if (!myIFrame.style) myIFrame.style = {};
       myIFrame.style.display = 'none';
       document.body.appendChild(myIFrame);
+      const panel = document.getElementById('console');
       var w = myIFrame.contentWindow;
       delete w.crypto;
       delete w.console;
       try {
         w.console.log('testing iframe.console.log');
+        panel.append(`testing iframe.console.log\n`)
         w.eval.call(w, 'console.log("testing eval(iframe.console.log)");');
+        panel.append(`console.log("testing eval(iframe.console.log)");\n`)
       } catch(e) {
-        console.error(e);
-        console.error(e.stack);
+        panel.append(`${e.toString()}\n`);
+        panel.append(`${e.stack}\n`);
       }
-    })();
   </script>
 </body>
 </html>
