@@ -19,6 +19,7 @@
       document.body.appendChild(myIFrame);
       var w = myIFrame.contentWindow;
       delete w.crypto;
+      delete w.console;
       try {
         w.console.log('testing iframe.console.log');
         w.eval.call(w, 'console.log("testing eval(iframe.console.log)");');
