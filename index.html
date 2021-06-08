@@ -1,1 +1,31 @@
-Github Pages
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Chrome console.log error repro</title>
+  <meta name="description" content="console error repro">
+  <meta name="author" content="brucejo75">
+
+</head>
+
+<body>
+  <script>
+    (function () {
+      myIFrame = document.createElement('iframe');
+      if (!myIFrame.style) myIFrame.style = {};
+      myIFrame.style.display = 'none';
+      document.body.appendChild(myIFrame);
+      var w = myIFrame.contentWindow;
+      delete w.crypto;
+      try {
+        w.console.log('testing iframe.console.log');
+      } catch(e) {
+        console.error(e);
+        console.error(e.stack);
+      }
+    })();
+  </script>
+</body>
+</html>
