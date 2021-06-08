@@ -11,9 +11,7 @@
 </head>
 
 <body>
-  <pre id='console'>
-
-  </pre>
+  <pre id='console'></pre>
   <script>
       myIFrame = document.createElement('iframe');
       if (!myIFrame.style) myIFrame.style = {};
@@ -22,15 +20,13 @@
       const panel = document.getElementById('console');
       var w = myIFrame.contentWindow;
       delete w.crypto;
-      delete w.console;
       try {
         w.console.log('testing iframe.console.log');
-        panel.append(`testing iframe.console.log\n`)
+        panel.append(`SUCCESS: iframe.console.log()\n`)
         w.eval.call(w, 'console.log("testing eval(iframe.console.log)");');
-        panel.append(`console.log("testing eval(iframe.console.log)");\n`)
+        panel.append(`SUCCESS: eval(iframe.console.log());\n`)
       } catch(e) {
-        panel.append(`${e.toString()}\n`);
-        panel.append(`${e.stack}\n`);
+        panel.append(`FAIL: ${e.toString()}\n${e.stack}\n`);
       }
   </script>
 </body>
