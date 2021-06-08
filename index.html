@@ -21,6 +21,7 @@
       delete w.crypto;
       try {
         w.console.log('testing iframe.console.log');
+        w.eval.call(w, 'testing eval(iframe.console.log)');
       } catch(e) {
         console.error(e);
         console.error(e.stack);
